@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.battleshipregistration.api.RegistrationService;
 import com.battleshipregistration.domain.BattleShipGame;
 import com.battleshipregistration.request.AddPlayerRequest;
 import com.battleshipregistration.response.AddPlayerResponse;
+import com.battleshipregistration.service.RegistrationService;
 
 @RestController
 @RequestMapping("/rest/api")

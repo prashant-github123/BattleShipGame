@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.battleshipregistration.api;
+package com.battleshipregistration.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
