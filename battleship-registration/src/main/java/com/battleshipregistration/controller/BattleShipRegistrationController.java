@@ -47,16 +47,16 @@ public class BattleShipRegistrationController {
 	public ResponseEntity<AddPlayerResponse> registerPlayer(@Valid @RequestBody AddPlayerRequest addPlayerRequest, Errors errors) {
 
 		logger.info("Inside BattleShipRegistrationController.registerPlayer()");
-		AddPlayerResponse response = new AddPlayerResponse();
 		
 		// If error, just return a 400 bad request, along with the error message.
 		if (errors.hasErrors()) {
+			AddPlayerResponse response = new AddPlayerResponse();
 			response.setMessage(registrationService.getValidationErrors(errors).toString());
 			response.setStatusCode(HttpStatus.BAD_REQUEST.value());
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		return registrationService.createNewPlayer(addPlayerRequest, response);
+		return registrationService.createNewPlayer(addPlayerRequest.getPlayerName());
 	}
 
 }

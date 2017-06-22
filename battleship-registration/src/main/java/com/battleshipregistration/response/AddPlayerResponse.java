@@ -12,6 +12,8 @@ public class AddPlayerResponse extends Response {
 	private String gameId;
 
 	private String playerId;
+	
+	private String playerName;
 
 	/**
 	 * @return the gameId
@@ -41,6 +43,20 @@ public class AddPlayerResponse extends Response {
 	 */
 	public void setPlayerId(String playerId) {
 		this.playerId = playerId;
+	}
+
+	/**
+	 * @return the playerName
+	 */
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	/**
+	 * @param playerName the playerName to set
+	 */
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
 	}
 
 }

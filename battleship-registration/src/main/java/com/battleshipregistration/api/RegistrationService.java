@@ -6,7 +6,6 @@ package com.battleshipregistration.api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 
-import com.battleshipregistration.request.AddPlayerRequest;
 import com.battleshipregistration.response.AddPlayerResponse;
 
 /**
@@ -22,8 +21,7 @@ public interface RegistrationService {
 	 * @return
 	 * @throws NumberFormatException
 	 */
-	ResponseEntity<AddPlayerResponse> createNewPlayer(AddPlayerRequest addPlayerRequest, AddPlayerResponse response)
-			throws NumberFormatException;
+	ResponseEntity<AddPlayerResponse> createNewPlayer(String addPlayerRequest) throws NumberFormatException;
 	
 	/**
 	 * 

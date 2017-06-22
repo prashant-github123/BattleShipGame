@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,6 @@ import org.springframework.validation.ObjectError;
 import com.battleshipregistration.constants.BattleShipConstants;
 import com.battleshipregistration.domain.BattleShipGame;
 import com.battleshipregistration.domain.Player;
-import com.battleshipregistration.request.AddPlayerRequest;
 import com.battleshipregistration.response.AddPlayerResponse;
 
 /**
@@ -61,21 +60,23 @@ public class RegistrationServiceImpl implements RegistrationService {
 	 * @return
 	 * @throws NumberFormatException
 	 */
-	public ResponseEntity<AddPlayerResponse> createNewPlayer(AddPlayerRequest addPlayerRequest, AddPlayerResponse response) throws NumberFormatException {
+	public ResponseEntity<AddPlayerResponse> createNewPlayer(String playerName) throws NumberFormatException {
 		
+		AddPlayerResponse response = new AddPlayerResponse();
 		TreeMap<String, List<Player>> playersData = (TreeMap<String, List<Player>>) game.getPlayers();
 		if (null == playersData) {
 			
 			Map<String, List<Player>> players = new HashMap<String, List<Player>>();
 			List<Player> playerList = new ArrayList<Player>();
-			playerList.add(new Player(firstPlayerId, addPlayerRequest.getPlayerName(), Boolean.TRUE));
+			playerList.add(new Player(firstPlayerId, playerName, Boolean.TRUE));
 			players.put(initialGameId, playerList);
 			game.setPlayers(players);
 			
 			response.setGameId(initialGameId);
 			response.setPlayerId(firstPlayerId);
+			response.setPlayerName(playerName);
 			response.setStatus(Boolean.TRUE);
-			response.setMessage("Added a new Player with name " + addPlayerRequest.getPlayerName());
+			response.setMessage("Added a new Player with name " + playerName);
 			response.setStatusCode(HttpStatus.OK.value());
 			return new ResponseEntity<>(response, new HttpHeaders(), HttpStatus.OK);
 		}
@@ -84,13 +85,14 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 			List<Player> playerList = lastEntry.getValue();
 			if (!playerList.isEmpty() && playerList.size() < 2) {
-				playerList.add(new Player(secondPlayerId , addPlayerRequest.getPlayerName(), Boolean.TRUE));
+				playerList.add(new Player(secondPlayerId , playerName, Boolean.TRUE));
 				game.getPlayers().put(lastEntry.getKey(), playerList);
 				
 				response.setGameId(lastEntry.getKey());
 				response.setPlayerId(secondPlayerId);
+				response.setPlayerName(playerName);
 				response.setStatus(Boolean.TRUE);
-				response.setMessage("Added a new Player with name " + addPlayerRequest.getPlayerName());
+				response.setMessage("Added a new Player with name " + playerName);
 				response.setStatusCode(HttpStatus.OK.value());
 				return new ResponseEntity<>(response, new HttpHeaders(), HttpStatus.OK);
 				
@@ -100,13 +102,14 @@ public class RegistrationServiceImpl implements RegistrationService {
 				String newKey = String.valueOf(parseInt + 1);
 
 				List<Player> players = new ArrayList<Player>();
-				players.add(new Player(firstPlayerId , addPlayerRequest.getPlayerName(), Boolean.TRUE));
+				players.add(new Player(firstPlayerId , playerName, Boolean.TRUE));
 				game.getPlayers().put(newKey, players);
 				
 				response.setGameId(newKey);
 				response.setPlayerId(firstPlayerId);
+				response.setPlayerName(playerName);
 				response.setStatus(Boolean.TRUE);
-				response.setMessage("Added a new Player with name " + addPlayerRequest.getPlayerName());
+				response.setMessage("Added a new Player with name " + playerName);
 				response.setStatusCode(HttpStatus.OK.value());
 				return new ResponseEntity<>(response, new HttpHeaders(), HttpStatus.OK);
 			}
