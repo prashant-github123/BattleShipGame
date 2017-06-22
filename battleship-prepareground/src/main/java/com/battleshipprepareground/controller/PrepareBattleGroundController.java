@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.battleshipprepareground.api.PrepareGroundService;
 import com.battleshipprepareground.request.PlaceShipRequest;
 import com.battleshipprepareground.request.RetrieveShipLocationRequest;
 import com.battleshipprepareground.response.PlaceShipResponse;
 import com.battleshipprepareground.response.RetrieveShipLocationResponse;
+import com.battleshipprepareground.service.PrepareGroundService;
 
 @RestController
 @RequestMapping("/rest/api")

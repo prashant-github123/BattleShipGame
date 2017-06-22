@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.battleshipprepareground.api;
+package com.battleshipprepareground.service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -88,7 +88,6 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 	 */
 	public ResponseEntity<PlaceShipResponse> populatePlayerShipCoordinate(PlaceShipRequest placeShipRequest, PlaceShipResponse response) {
 		
-		
 		TreeMap<String, List<Player>> playersData = (TreeMap<String, List<Player>>) game.getPlayers();
 		if (null == playersData) 
 			return createNewGame(placeShipRequest, response);
@@ -102,10 +101,7 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 			if (placeShipRequest.getPlayerId().equalsIgnoreCase(pl.getId())) {
 				
 				playerNotFound = Boolean.FALSE;
-				List<String> shipCoord = new ArrayList<String>();
-
-				createCoordinateList(placeShipRequest, shipCoord);
-				pl.setShipCoordinates(shipCoord);
+				pl.setShipCoordinates(	createCoordinateList(placeShipRequest));
 
 				response.setStatus(Boolean.TRUE);
 				response.setMessage("Coordinates Updated Successfully for User " + placeShipRequest.getPlayerId());
@@ -116,9 +112,8 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 		}
 		
 		if(playerNotFound){
-			List<String> shipCoord = new ArrayList<String>();
-			createCoordinateList(placeShipRequest, shipCoord);
-			players.add(new Player(placeShipRequest.getPlayerId(), placeShipRequest.getPlayerName(), Boolean.TRUE, shipCoord));
+			
+			players.add(new Player(placeShipRequest.getPlayerId(), placeShipRequest.getPlayerName(), Boolean.TRUE, createCoordinateList(placeShipRequest)));
 			
 			response.setStatus(Boolean.TRUE);
 			response.setMessage("Coordinates Updated Successfully for User " + placeShipRequest.getPlayerId());
@@ -143,10 +138,7 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 		Map<String, List<Player>> players = new HashMap<String, List<Player>>();
 		List<Player> playerList = new ArrayList<Player>();
 
-		List<String> shipCoord = new ArrayList<String>();
-		createCoordinateList(placeShipRequest, shipCoord);
-
-		playerList.add(new Player(placeShipRequest.getPlayerId(), placeShipRequest.getPlayerName(), Boolean.TRUE, shipCoord));
+		playerList.add(new Player(placeShipRequest.getPlayerId(), placeShipRequest.getPlayerName(), Boolean.TRUE, createCoordinateList(placeShipRequest)));
 		players.put(placeShipRequest.getGameId(), playerList);
 		game.setPlayers(players);
 
@@ -162,13 +154,17 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 	 * @param placeShipRequest
 	 * @param shipCoord
 	 */
-	private void createCoordinateList(PlaceShipRequest placeShipRequest, List<String> shipCoord) {
-		String[] coordinatesArray = StringUtils.split(placeShipRequest.getShipCoordinates(), BattleShipConstants.COMMA);
+	private List<String> createCoordinateList(PlaceShipRequest placeShipRequest) {
+		
+		List<String> shipCoord = new ArrayList<String>();
+		String coord = placeShipRequest.getShipCoordinates();
+		String[] coordinatesArray = coord.split(",");
+
 		for (String coordinate : coordinatesArray) {
-			shipCoord.add(coordinate);
+			shipCoord.add(coordinate.trim());
 		}
+		return shipCoord;
 	}
-	
 	
 	/**
 	 * @param retrieveShipLocationRequest

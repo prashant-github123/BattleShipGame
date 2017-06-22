@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.battleshipprepareground.api;
+package com.battleshipprepareground.service;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
