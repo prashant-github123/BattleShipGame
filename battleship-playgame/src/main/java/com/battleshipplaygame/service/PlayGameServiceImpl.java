@@ -98,7 +98,6 @@ public class PlayGameServiceImpl implements PlayGameService {
 
 		List<Player> players = playersData.get(checkTurnStatusRequest.getGameId());
 		if (null == players || players.isEmpty()){
-			//createNewGame(checkTurnStatusRequest);
 			List<Player> playerList = new ArrayList<>();
 
 			playerList.add(new Player(BattleShipConstants.P1));
@@ -125,7 +124,6 @@ public class PlayGameServiceImpl implements PlayGameService {
 			if (isGameOver) {
 				response.setTurn(Boolean.FALSE);
 				response.setGameOver(Boolean.TRUE);
-				// return;
 			} else {
 				
 				String whoseTurn =  game.getWhoseTurnMap().get(checkTurnStatusRequest.getGameId());
@@ -140,9 +138,7 @@ public class PlayGameServiceImpl implements PlayGameService {
 			}
 		} else {
 			if (checkTurnStatusRequest.isGameOver()) {
-				//game.setGameOver(Boolean.TRUE);
 				game.getIsGameOverMap().put(checkTurnStatusRequest.getGameId(), Boolean.TRUE);
-				// return;
 			} else if (BattleShipConstants.HIT.equalsIgnoreCase(checkTurnStatusRequest.getHitOrMiss()) || BattleShipConstants.MISS.equalsIgnoreCase(checkTurnStatusRequest.getHitOrMiss())) {
 				
 				
@@ -160,10 +156,8 @@ public class PlayGameServiceImpl implements PlayGameService {
 				}
 
 				if (BattleShipConstants.P1.equalsIgnoreCase(checkTurnStatusRequest.getPlayerId())) {
-					//game.setWhoseTurn(BattleShipConstants.P2);
 					game.getWhoseTurnMap().put(checkTurnStatusRequest.getGameId(), BattleShipConstants.P2);
 				} else {
-					//game.setWhoseTurn(BattleShipConstants.P1);
 					game.getWhoseTurnMap().put(checkTurnStatusRequest.getGameId(), BattleShipConstants.P1);
 				}
 			}
