@@ -7,6 +7,8 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication
 public class BattleshipRegistrationApplication extends SpringBootServletInitializer {
+	
+	private static Class<BattleshipRegistrationApplication> applicationClass = BattleshipRegistrationApplication.class;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BattleshipRegistrationApplication.class, args);
@@ -17,5 +19,4 @@ public class BattleshipRegistrationApplication extends SpringBootServletInitiali
 		return application.sources(applicationClass);
 	}
 
-	private static Class<BattleshipRegistrationApplication> applicationClass = BattleshipRegistrationApplication.class;
 }

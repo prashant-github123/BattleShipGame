@@ -21,7 +21,7 @@ public interface RegistrationService {
 	 * @return
 	 * @throws NumberFormatException
 	 */
-	ResponseEntity<AddPlayerResponse> createNewPlayer(String addPlayerRequest) throws NumberFormatException;
+	ResponseEntity<AddPlayerResponse> createNewPlayer(String addPlayerRequest);
 	
 	/**
 	 * 

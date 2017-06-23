@@ -38,21 +38,6 @@ public abstract class BaseEntity implements Serializable {
 		return getId().hashCode();
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-
-		BaseEntity that = (BaseEntity) o;
-
-		if (!id.equals(that.id))
-			return false;
-
-		return true;
-	}
-
 	public int getVersion() {
 		return version;
 	}

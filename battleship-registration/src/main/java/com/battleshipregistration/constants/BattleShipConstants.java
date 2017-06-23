@@ -10,6 +10,8 @@ package com.battleshipregistration.constants;
  *
  */
 public class BattleShipConstants {
+	
+	private BattleShipConstants() {}
 
 	public static final String COMMA = ",";
 
