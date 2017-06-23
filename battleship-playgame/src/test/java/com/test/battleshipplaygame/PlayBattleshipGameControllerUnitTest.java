@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.battleshipplaygame.BattleshipPlaygameApplication;
 import com.battleshipplaygame.controller.PlayBattleShipGameController;
 import com.battleshipplaygame.domain.BattleShipGame;
+import com.battleshipplaygame.service.PlayGameService;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,6 +30,9 @@ public class PlayBattleshipGameControllerUnitTest {
 
     @Mock
     private BattleShipGame game;
+    
+    @Mock
+    private PlayGameService playGameService;
     
     @InjectMocks
     private PlayBattleShipGameController playgameController;
