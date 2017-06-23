@@ -115,13 +115,22 @@ public class PlayGameServiceImpl implements PlayGameService {
 		}
 
 		if (checkTurnStatusRequest.isCheckTurnStatusOnly()) {
+			
+			
+			Boolean isGameOver = game.getIsGameOverMap().get(checkTurnStatusRequest.getGameId());
+			
+			if(null== isGameOver)
+				isGameOver = Boolean.FALSE;
 
-			if (game.isGameOver()) {
+			if (isGameOver) {
 				response.setTurn(Boolean.FALSE);
 				response.setGameOver(Boolean.TRUE);
 				// return;
 			} else {
-				if (checkTurnStatusRequest.getPlayerId().equalsIgnoreCase(game.getWhoseTurn())) {
+				
+				String whoseTurn =  game.getWhoseTurnMap().get(checkTurnStatusRequest.getGameId());
+				
+				if (checkTurnStatusRequest.getPlayerId().equalsIgnoreCase(whoseTurn)) {
 					response.setTurn(Boolean.TRUE);
 					// return
 				} else {
@@ -131,7 +140,8 @@ public class PlayGameServiceImpl implements PlayGameService {
 			}
 		} else {
 			if (checkTurnStatusRequest.isGameOver()) {
-				game.setGameOver(Boolean.TRUE);
+				//game.setGameOver(Boolean.TRUE);
+				game.getIsGameOverMap().put(checkTurnStatusRequest.getGameId(), Boolean.TRUE);
 				// return;
 			} else if (BattleShipConstants.HIT.equalsIgnoreCase(checkTurnStatusRequest.getHitOrMiss()) || BattleShipConstants.MISS.equalsIgnoreCase(checkTurnStatusRequest.getHitOrMiss())) {
 				
@@ -150,9 +160,11 @@ public class PlayGameServiceImpl implements PlayGameService {
 				}
 
 				if (BattleShipConstants.P1.equalsIgnoreCase(checkTurnStatusRequest.getPlayerId())) {
-					game.setWhoseTurn(BattleShipConstants.P2);
+					//game.setWhoseTurn(BattleShipConstants.P2);
+					game.getWhoseTurnMap().put(checkTurnStatusRequest.getGameId(), BattleShipConstants.P2);
 				} else {
-					game.setWhoseTurn(BattleShipConstants.P1);
+					//game.setWhoseTurn(BattleShipConstants.P1);
+					game.getWhoseTurnMap().put(checkTurnStatusRequest.getGameId(), BattleShipConstants.P1);
 				}
 			}
 		}

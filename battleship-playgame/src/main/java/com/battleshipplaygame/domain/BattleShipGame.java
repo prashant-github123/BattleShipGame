@@ -3,6 +3,7 @@
  */
 package com.battleshipplaygame.domain;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
@@ -17,9 +18,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class BattleShipGame {
 
-	private String whoseTurn;
-	
-	private boolean isGameOver;
+	private Map<String, String> whoseTurnMap;
+
+	private Map<String, Boolean> isGameOverMap;
 
 	private NavigableMap<String, List<Player>> players;
 
@@ -32,32 +33,41 @@ public class BattleShipGame {
 	}
 
 	/**
-	 * @return the whoseTurn
+	 * @return the whoseTurnMap
 	 */
-	public String getWhoseTurn() {
-		return whoseTurn;
+	public Map<String, String> getWhoseTurnMap() {
+		if (null == whoseTurnMap)
+			whoseTurnMap =  new HashMap<String, String>();
+		
+		return whoseTurnMap;
+		
 	}
 
 	/**
-	 * @param whoseTurn
-	 *            the whoseTurn to set
+	 * @param whoseTurnMap
+	 *            the whoseTurnMap to set
 	 */
-	public void setWhoseTurn(String whoseTurn) {
-		this.whoseTurn = whoseTurn;
+	public void setWhoseTurnMap(Map<String, String> whoseTurnMap) {
+		this.whoseTurnMap = whoseTurnMap;
 	}
 
 	/**
-	 * @return the isGameOver
+	 * @return the isGameOverMap
 	 */
-	public boolean isGameOver() {
-		return isGameOver;
-	}
+	public Map<String, Boolean> getIsGameOverMap() {
+		if (null == isGameOverMap) 
+			isGameOverMap = new HashMap<String, Boolean>();
+		 
+			return isGameOverMap;
+		}
+	
 
 	/**
-	 * @param isGameOver the isGameOver to set
+	 * @param isGameOverMap
+	 *            the isGameOverMap to set
 	 */
-	public void setGameOver(boolean isGameOver) {
-		this.isGameOver = isGameOver;
+	public void setIsGameOverMap(Map<String, Boolean> isGameOverMap) {
+		this.isGameOverMap = isGameOverMap;
 	}
 
 }
