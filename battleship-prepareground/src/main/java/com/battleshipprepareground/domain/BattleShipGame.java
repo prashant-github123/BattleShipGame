@@ -24,7 +24,7 @@ public class BattleShipGame {
 	}
 
 	public void setPlayers(Map<String, List<Player>> players) {
-		this.players = new TreeMap<String, List<Player>>(players);
+		this.players = new TreeMap<>(players);
 	}
 
 }

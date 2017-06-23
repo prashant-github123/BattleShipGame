@@ -97,7 +97,7 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 		List<Player> players = playersData.get(placeShipRequest.getGameId());
 		if(null == players){
 			
-			List<Player> playerList = new ArrayList<Player>();
+			List<Player> playerList = new ArrayList<>();
 			playerList.add(new Player(placeShipRequest.getPlayerId(), placeShipRequest.getPlayerName(), Boolean.TRUE, createCoordinateList(placeShipRequest)));
 			playersData.put(placeShipRequest.getGameId(), playerList);
 			game.setPlayers(playersData);
@@ -147,8 +147,8 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 	 */
 	private ResponseEntity<PlaceShipResponse> createNewGame(PlaceShipRequest placeShipRequest, PlaceShipResponse response) {
 		
-		Map<String, List<Player>> players = new HashMap<String, List<Player>>();
-		List<Player> playerList = new ArrayList<Player>();
+		Map<String, List<Player>> players = new HashMap<>();
+		List<Player> playerList = new ArrayList<>();
 
 		playerList.add(new Player(placeShipRequest.getPlayerId(), placeShipRequest.getPlayerName(), Boolean.TRUE, createCoordinateList(placeShipRequest)));
 		players.put(placeShipRequest.getGameId(), playerList);
@@ -167,7 +167,7 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 	 */
 	private List<String> createCoordinateList(PlaceShipRequest placeShipRequest) {
 		
-		List<String> shipCoord = new ArrayList<String>();
+		List<String> shipCoord = new ArrayList<>();
 		String coord = placeShipRequest.getShipCoordinates();
 		String[] coordinatesArray = coord.split(",");
 
@@ -198,7 +198,7 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 			List<Player> players = playersData.get(retrieveShipLocationRequest.getGameId());
 			if (null != players && !players.isEmpty()) {
 
-				List<RetrieveCoordinatePlayerData> playerList = new ArrayList<RetrieveCoordinatePlayerData>();
+				List<RetrieveCoordinatePlayerData> playerList = new ArrayList<>();
 				if (null != players && players.size() > 1) {
 
 					for (Player pl : players) {

@@ -14,5 +14,7 @@ public class BattleShipConstants {
 	public static final String COMMA = ",";
 
 	public static final String GAME_ID = "gameId";
+	
+	private BattleShipConstants() {}
 
 }

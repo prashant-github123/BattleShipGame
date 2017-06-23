@@ -10,6 +10,12 @@ import java.util.List;
  *
  */
 public class Player extends BaseEntity {
+	
+	private String name;
+
+	private boolean isSelected;
+
+	private List<String> shipCoordinates;
 
 	public Player(String id, String name, boolean isSelected, List<String> shipCoordinates) {
 		super();
@@ -18,12 +24,6 @@ public class Player extends BaseEntity {
 		this.isSelected = isSelected;
 		this.shipCoordinates = shipCoordinates;
 	}
-
-	private String name;
-
-	private boolean isSelected;
-
-	private List<String> shipCoordinates;
 
 	public Player(String id, String name, boolean isSelected) {
 		super();

@@ -3,7 +3,6 @@
  */
 package com.battleshipprepareground.response;
 
-import java.util.List;
 
 /**
  * @author amall3
