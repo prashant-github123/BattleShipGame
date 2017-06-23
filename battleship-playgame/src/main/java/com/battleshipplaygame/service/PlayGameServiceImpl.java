@@ -97,9 +97,15 @@ public class PlayGameServiceImpl implements PlayGameService {
 		playersData = (TreeMap<String, List<Player>>) game.getPlayers();
 
 		List<Player> players = playersData.get(checkTurnStatusRequest.getGameId());
-		if (null == players || players.isEmpty())
-			createNewGame(checkTurnStatusRequest);
-		
+		if (null == players || players.isEmpty()){
+			//createNewGame(checkTurnStatusRequest);
+			List<Player> playerList = new ArrayList<Player>();
+
+			playerList.add(new Player(BattleShipConstants.P1));
+			playerList.add(new Player(BattleShipConstants.P2));
+			playersData.put(checkTurnStatusRequest.getGameId(), playerList);
+
+		}
 		players = game.getPlayers().get(checkTurnStatusRequest.getGameId());
 
 		for (Player pl : players) {
