@@ -99,7 +99,7 @@ public class SwaggerConfig {
 	 */
 	private ApiInfo apiInfo() {
 
-		ApiInfo apiInfo = new ApiInfo(
+		return new ApiInfo(
 				apiInfoTitle ,// title
 				apiInfoDescription ,// description
 				apiInfoVersion ,// version
@@ -108,8 +108,6 @@ public class SwaggerConfig {
 				apiInfoLicense ,// license
 				apiInfoLicenseUrl);// license url
 		
-		return apiInfo;
-
 	}
 	
 }

@@ -17,13 +17,13 @@ public class Player extends BaseEntity {
 
 	private List<String> opponentHitCoordinates;
 
-	public Player(String id, String name, boolean isSelected) {
+	public Player(String id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 
-	public Player(String id, String name, boolean isSelected, List<String> opponentHitCoordinates) {
+	public Player(String id, String name, List<String> opponentHitCoordinates) {
 		super();
 		this.id = id;
 		this.name = name;

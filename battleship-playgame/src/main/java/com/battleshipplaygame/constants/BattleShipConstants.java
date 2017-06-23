@@ -22,5 +22,8 @@ public class BattleShipConstants {
 	public static final String MISS = "miss";
 
 	public static final String HIT = "hit";
+	
+	private BattleShipConstants() {
+	}
 
 }

@@ -29,7 +29,7 @@ public class BattleShipGame {
 	}
 
 	public void setPlayers(Map<String, List<Player>> players) {
-		this.players = new TreeMap<String, List<Player>>(players);
+		this.players = new TreeMap<>(players);
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class BattleShipGame {
 	 */
 	public Map<String, String> getWhoseTurnMap() {
 		if (null == whoseTurnMap)
-			whoseTurnMap =  new HashMap<String, String>();
+			whoseTurnMap =  new HashMap<>();
 		
 		return whoseTurnMap;
 		
@@ -56,7 +56,7 @@ public class BattleShipGame {
 	 */
 	public Map<String, Boolean> getIsGameOverMap() {
 		if (null == isGameOverMap) 
-			isGameOverMap = new HashMap<String, Boolean>();
+			isGameOverMap = new HashMap<>();
 		 
 			return isGameOverMap;
 		}

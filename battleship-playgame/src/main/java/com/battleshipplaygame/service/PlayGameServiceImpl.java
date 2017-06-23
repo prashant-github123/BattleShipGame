@@ -50,8 +50,8 @@ public class PlayGameServiceImpl implements PlayGameService {
 
 		logger.info("Inside PlayGameServiceImpl.createNewGame()");
 
-		Map<String, List<Player>> players = new TreeMap<String, List<Player>>();
-		List<Player> playerList = new ArrayList<Player>();
+		Map<String, List<Player>> players = new TreeMap<>();
+		List<Player> playerList = new ArrayList<>();
 
 		playerList.add(new Player(BattleShipConstants.P1));
 		playerList.add(new Player(BattleShipConstants.P2));
@@ -99,7 +99,7 @@ public class PlayGameServiceImpl implements PlayGameService {
 		List<Player> players = playersData.get(checkTurnStatusRequest.getGameId());
 		if (null == players || players.isEmpty()){
 			//createNewGame(checkTurnStatusRequest);
-			List<Player> playerList = new ArrayList<Player>();
+			List<Player> playerList = new ArrayList<>();
 
 			playerList.add(new Player(BattleShipConstants.P1));
 			playerList.add(new Player(BattleShipConstants.P2));
@@ -152,7 +152,7 @@ public class PlayGameServiceImpl implements PlayGameService {
 					
 						List<String> hitCoodinate = pl.getOpponentHitCoordinates();
 						if (null == hitCoodinate) {
-							hitCoodinate = new ArrayList<String>();
+							hitCoodinate = new ArrayList<>();
 						}
 						hitCoodinate.add(checkTurnStatusRequest.getHitCoordinate());
 						pl.setOpponentHitCoordinates(hitCoodinate);
