@@ -45,6 +45,8 @@ import com.battleshipprepareground.response.RetrieveShipLocationResponse;
 @PropertySource("classpath:battleshipGameConfiguration.properties")
 public class PrepareGroundServiceImpl implements PrepareGroundService {
 	
+	private static final String SUCCESS_MSG = "Coordinates Updated Successfully for User ";
+
 	@Value("${battleship.initialGameId}")
 	private String initialGameId;
 
@@ -93,8 +95,18 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 			return createNewGame(placeShipRequest, response);
 
 		List<Player> players = playersData.get(placeShipRequest.getGameId());
-		if(null == players)
-			return createNewGame(placeShipRequest, response);
+		if(null == players){
+			
+			List<Player> playerList = new ArrayList<Player>();
+			playerList.add(new Player(placeShipRequest.getPlayerId(), placeShipRequest.getPlayerName(), Boolean.TRUE, createCoordinateList(placeShipRequest)));
+			playersData.put(placeShipRequest.getGameId(), playerList);
+			game.setPlayers(playersData);
+
+			response.setStatus(Boolean.TRUE);
+			response.setMessage(SUCCESS_MSG + placeShipRequest.getPlayerId());
+			response.setStatusCode(HttpStatus.OK.value());
+			return new ResponseEntity<>(response, new HttpHeaders(), HttpStatus.OK);
+		}
 		
 		boolean playerNotFound = Boolean.TRUE;
 		for (Player pl : players) {
@@ -104,7 +116,7 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 				pl.setShipCoordinates(	createCoordinateList(placeShipRequest));
 
 				response.setStatus(Boolean.TRUE);
-				response.setMessage("Coordinates Updated Successfully for User " + placeShipRequest.getPlayerId());
+				response.setMessage(SUCCESS_MSG + placeShipRequest.getPlayerId());
 				response.setStatusCode(HttpStatus.OK.value());
 				return new ResponseEntity<>(response, new HttpHeaders(), HttpStatus.OK);
 				
@@ -116,7 +128,7 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 			players.add(new Player(placeShipRequest.getPlayerId(), placeShipRequest.getPlayerName(), Boolean.TRUE, createCoordinateList(placeShipRequest)));
 			
 			response.setStatus(Boolean.TRUE);
-			response.setMessage("Coordinates Updated Successfully for User " + placeShipRequest.getPlayerId());
+			response.setMessage(SUCCESS_MSG + placeShipRequest.getPlayerId());
 			response.setStatusCode(HttpStatus.OK.value());
 			return new ResponseEntity<>(response, new HttpHeaders(), HttpStatus.OK);
 		}
@@ -143,12 +155,11 @@ public class PrepareGroundServiceImpl implements PrepareGroundService {
 		game.setPlayers(players);
 
 		response.setStatus(Boolean.TRUE);
-		response.setMessage("Coordinates Updated Successfully for User " + placeShipRequest.getPlayerId());
+		response.setMessage(SUCCESS_MSG + placeShipRequest.getPlayerId());
 		response.setStatusCode(HttpStatus.OK.value());
 		return new ResponseEntity<>(response, new HttpHeaders(), HttpStatus.OK);
 	}
-
-
+	
 
 	/**
 	 * @param placeShipRequest
